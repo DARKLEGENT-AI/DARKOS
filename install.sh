@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 set -e
 
-log() { echo -e "\n=== $1 ===\n"; }
+log() { echo -e "\n\e[41m=== $1 ===\e[0m\n"; }
 
 ### --- Пакеты --- ###
 install_pkgs() {
-    log "Установка основных пакетов Debain"
+    log "Установка основных пакетов Debain (Необходимо устанавливать под пользователем, не под root !)"
     sudo apt update
     sudo apt install -y \
         bspwm sxhkd polybar rofi nitrogen picom \
         network-manager pulseaudio pavucontrol \
         bluez blueman xinput xbacklight \
         git curl unzip \
-        firmware-misc-nonfree intel-media-va-driver-non-free \
-        dolphin
+        firmware-misc-nonfree \
+        dolphin alacritty pamixer brightnessctl
     log "Установка доп пакетов"
     sudo apt install -y \
-        telegram-desktop firefox-esr code thunderberd libreoffice \
+        firefox-esr thunderbird libreoffice \
         chromium
 }
 
@@ -37,6 +37,19 @@ install_configs() {
 ### --- RUN --- ###
 install_pkgs
 install_configs
-setup_wifi_resume
+
+### --- Создание .xinitrc --- ###
+log "Создание ~/.xinitrc для запуска окружения через startx"
+cat <<'EOF' > ~/.xinitrc
+#!/bin/sh
+# Восстановление фона и запуск сервисов
+nitrogen --restore &
+picom &
+sxhkd &
+# Запуск bspwm
+exec bspwm
+EOF
+chmod +x ~/.xinitrc
+
 
 log "ГОТОВО. Перезапусти систему."
