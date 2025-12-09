@@ -11,7 +11,7 @@ install_pkgs() {
     sudo apt update
     sudo apt install -y \
         bspwm sxhkd polybar rofi nitrogen picom \
-        network-manager pulseaudio pavucontrol \
+        iwd pulseaudio pavucontrol \
         bluez blueman xinput xbacklight \
         git curl unzip \
         firmware-misc-nonfree \
@@ -19,7 +19,7 @@ install_pkgs() {
     log "Установка доп пакетов"
     sudo apt install -y \
         firefox-esr thunderbird  \
-        chromium wps-office
+        chromium xinit
 }
 
 ### --- Копирование конфигов --- ###
