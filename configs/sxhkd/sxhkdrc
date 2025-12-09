@@ -8,10 +8,10 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show run
+	rofi -show drun -theme /usr/share/rofi/themes/DARKOS.RASI
 # Кнопка программ
 XF86LaunchB
-	rofi -show run
+	rofi -show drun -theme /usr/share/rofi/themes/DARKOS.RASI
 
 # make sxhkd reload its configuration files:
 super + Escape

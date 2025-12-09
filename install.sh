@@ -13,13 +13,15 @@ install_pkgs() {
         bspwm sxhkd polybar rofi nitrogen picom \
         iwd pulseaudio pavucontrol \
         bluez blueman xinput xbacklight \
-        git curl unzip \
+        git gh curl unzip \
         firmware-misc-nonfree \
         dolphin alacritty pamixer brightnessctl
     log "Установка доп пакетов"
     sudo apt install -y \
         firefox-esr thunderbird  \
         chromium xinit
+    log "Установка темы rofi"
+    sudo cp ~/DARKOS/configs/DARKOS.RASI /usr/share/rofi/themes/
 }
 
 ### --- Копирование конфигов --- ###
