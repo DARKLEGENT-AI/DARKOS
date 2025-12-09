@@ -19,7 +19,7 @@ install_pkgs() {
     log "Установка доп пакетов"
     sudo apt install -y \
         firefox-esr thunderbird  \
-        chromium xinit
+        chromium xinit flameshot
     log "Установка темы rofi"
     sudo cp ~/DARKOS/configs/DARKOS.RASI /usr/share/rofi/themes/
 }
