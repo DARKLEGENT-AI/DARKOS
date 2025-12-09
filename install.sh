@@ -33,6 +33,7 @@ install_configs() {
     cp -r configs/bspwm/* ~/.config/bspwm/
     cp -r configs/sxhkd/* ~/.config/sxhkd/
     cp -r configs/polybar/* ~/.config/polybar/
+    cp -r configs/flameshot/* ~/.config/flameshot/
 
     chmod +x ~/.config/bspwm/bspwmrc 2>/dev/null || true
     chmod +x ~/.config/polybar/*.sh 2>/dev/null || true
