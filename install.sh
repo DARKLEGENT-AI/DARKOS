@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-log() { echo -e "\n\e[41m=== $1 ===\e[0m\n"; }
+log() {
+    echo -e "\e[41;97m=== $1 ===\e[0m"
+}
 
 ### --- Пакеты --- ###
 install_pkgs() {
@@ -16,8 +18,8 @@ install_pkgs() {
         dolphin alacritty pamixer brightnessctl
     log "Установка доп пакетов"
     sudo apt install -y \
-        firefox-esr thunderbird libreoffice \
-        chromium
+        firefox-esr thunderbird  \
+        chromium wps-office
 }
 
 ### --- Копирование конфигов --- ###
@@ -38,7 +40,7 @@ install_configs() {
 install_pkgs
 install_configs
 
-### --- Создание .xinitrc --- ###
+### --- Создание .xinitrc для запуска startx --- ###
 log "Создание ~/.xinitrc для запуска окружения через startx"
 cat <<'EOF' > ~/.xinitrc
 #!/bin/sh
