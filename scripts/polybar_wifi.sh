@@ -1,18 +1,24 @@
 #!/bin/bash
 
-INTERFACE="wlan0"
-SSID=$(iwctl station $INTERFACE show | awk '/Connected network/ { $1=""; $2=""; gsub(/^[ \t]+/, ""); print }')
+IFACE="wlp3s0"
+
+# Получаем SSID активного подключения на нужном интерфейсе
+SSID=$(nmcli -t -f NAME,DEVICE connection show --active | grep "${IFACE}$" | cut -d: -f1)
 
 if [ -n "$SSID" ]; then
-    if ping -c 1 -W 1 8.8.8.8 &> /dev/null; then
-	STATUS="Internet"
+    # Проверяем доступ в интернет
+    if [ "$(nmcli -t -f CONNECTIVITY general)" = "full" ]; then
+        STATUS="Internet"
     else
-	STATUS="No internet"
-	sudo dhclient $INTERFACE &> /dev/null
-	sleep 2
+        STATUS="No internet"
+        echo "Интернета нет, переподключаем $IFACE..."
+        nmcli device disconnect "$IFACE" >/dev/null 2>&1
+        sleep 2
+        nmcli device connect "$IFACE" >/dev/null 2>&1
     fi
 else
     SSID=" - "
+    STATUS="Disconnected"
 fi
 
 echo "$SSID"

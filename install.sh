@@ -12,10 +12,10 @@ install_pkgs() {
     sudo apt install -y \
         bspwm sxhkd polybar rofi nitrogen picom \
         iwd pulseaudio pavucontrol \
-        bluez blueman xinput xbacklight \
+        bluez blueman xinput xbacklight pipewire pipewire-audio wireplumber libspa-0.2-bluetooth \
         git gh curl unzip \
-        firmware-misc-nonfree \
-        dolphin alacritty pamixer brightnessctl
+        firmware-misc-nonfree iwd network-manager \
+        dolphin alacritty pamixer brightnessctl neofetch
     log "Установка доп пакетов"
     sudo apt install -y \
         firefox-esr thunderbird  \
