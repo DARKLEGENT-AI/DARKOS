@@ -1,6 +1,13 @@
 #!/bin/bash
 
 DEFAULT_IFACE="wg0"
+LOADING_FILE="$HOME/.cache/wg_loading"
+
+mkdir -p "$HOME/.cache"
+touch "$LOADING_FILE"
+
+# Чтобы файл точно удалился даже при ошибке
+trap 'rm -f "$LOADING_FILE"; polybar-msg hook vpn 1' EXIT
 
 if [[ "$1" == "choose" ]]; then
     FILE=$(zenity --file-selection \
